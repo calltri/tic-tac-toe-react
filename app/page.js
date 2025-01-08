@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 /*
 TODO:
-  identify player turns
-  calculate who wins (array of win states?, checker, and updater?)
   Store previous data
   HAve go back thing
 
@@ -102,13 +100,32 @@ export default function Game() {
     setXIsNext(!xIsNext);
   }
 
+  function jumpTo(nextMove) {
+
+  }
+
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = "Go to move #" + move;
+    }
+    else {
+      description = "Go to game start";
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}> {description} </button>
+      </li>
+    );
+  });
+
   return (
     <div className="game">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
       </div>
       <div className='game-info'>
-        <ol></ol>
+        <ol>{moves}</ol>
       </div>
     </div>
   )
