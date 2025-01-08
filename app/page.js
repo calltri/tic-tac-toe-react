@@ -38,12 +38,6 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i]
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      console.log("Test: " + (squares[a] && squares[a]) + " " + (squares[a] && squares[b]) + " " + (squares[a] && squares[c]))
-      console.log(squares[a] && squares[a])
-
-      console.log(squares[a] && squares[b])
-
-      console.log(squares[a] && squares[c])
       return squares[a];
     }
   }
@@ -107,7 +101,9 @@ export default function Game() {
   }
 
   function jumpTo(nextMove) {
-
+    const nextHistory = [...history.slice(0, nextMove + 1)];
+    setHistory(nextHistory);
+    setXIsNext(nextMove % 2 === 0);
   }
 
   const moves = history.map((squares, move) => {
